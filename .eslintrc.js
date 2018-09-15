@@ -29,7 +29,7 @@ module.exports = {
     'no-spaced-func': 0,
     'func-names': 2,
     'no-shadow': 2,
-    camelcase: 2,
+    camelcase: [2, { ignoreDestructuring: true }],
     'new-cap': [2, { capIsNewExceptions: ['Then', 'When', 'Given', 'AfterFeatures', 'After', 'BeforeFeatures', 'Before', 'BeforeFeature'] }],
     'dot-notation': 2,
     'no-native-reassign': 1,
@@ -229,7 +229,7 @@ module.exports = {
     'jsx-a11y/no-redundant-roles': 1,
     'prefer-destructuring': 0,
     'lines-between-class-members': 1,
-    'no-return-assign': 1,
+    'no-return-assign': ['error', 'except-parens'],
     'spaced-comment': 1,
     'no-restricted-globals': 1,
     'no-else-return': 1,
@@ -253,6 +253,7 @@ module.exports = {
     impliedStrict: true,
     ecmaFeatures: {
       jsx: true,
+      legacyDecorators: true,
     },
   },
   globals: {

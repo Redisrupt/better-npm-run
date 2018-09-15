@@ -1,2 +1,2 @@
-console.log('Command executed!'); // eslint-disable-line
-process.exit(0);
+console.log('Command executed!');
+process.exit(0); // eslint-disable-line no-process-exit

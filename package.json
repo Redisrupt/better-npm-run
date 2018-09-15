@@ -23,7 +23,7 @@
     "test:params": "node index.js test:params --test",
     "test:command:object": "node index.js test:command:object",
     "test:command:string": "node index.js test:command:string",
-    "lint": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'index.js' './lib/exec.js'",
+    "lint": "eslint --cache --cache-location node_modules/.cache/ -f friendly '*.js' './lib/**/*.js' './test/**/*.js'",
     "test": "npm run lint && node index.js test:array-command && npm run test:env && npm run test:env-extend && npm run test:params && npm run test:command:object && npm run test:command:string",
     "changelog": "changelogx -f markdown -o ./changelog.md",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog'",

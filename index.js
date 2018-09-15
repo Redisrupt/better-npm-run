@@ -1,12 +1,14 @@
 #!/usr/bin/env node
+/* eslint-disable global-require */
+/* eslint-disable no-process-exit */
 
-var cpExec = require('child_process').exec;
-var logger = require('clix-logger/logger');
-var assign = require('object-assign');
+const cpExec = require('child_process').exec;
+const logger = require('clix-logger/logger');
+const assign = require('object-assign');
 
-var path = require('path');
-var exec = require('./lib/exec.js');
-var join = path.join;
+const path = require('path');
+const exec = require('./lib/exec.js');
+const join = path.join;
 
 try {
   require('@babel/register');
@@ -14,27 +16,27 @@ try {
   logger.subtle('babel-register not found... if ES6 syntax is needed please install `babel-register`');
 }
 
-var addNPMBinToPath = function(cb) {
-  cpExec('npm bin', function(error, stdout, stderr) {
+const addNPMBinToPath = cb => {
+  cpExec('npm bin', (error, stdout, stderr) => {
     if (error) {
       logger.error('received error', error);
       stderr && logger.error(stderr);
       return;
     }
 
-    process.env.PATH += '' + path.delimiter + stdout.trim();
+    process.env.PATH += `${path.delimiter}${stdout.trim()}`;
 
     cb && cb();
   });
 };
 
-var doExec = function(theCommand, commandName, config) {
-  logger.subtle('Executing script: ' + commandName);
+const doExec = (theCommand, commandName, config) => {
+  logger.subtle(`Executing script: ${commandName}`);
   exec(theCommand, commandName, config);
 };
 
-var tryRequire = function(pkgName, defaultValue) {
-  var ret;
+const tryRequire = (pkgName, defaultValue) => {
+  let ret;
   try {
     ret = require(pkgName);
   } catch (ex) {
@@ -47,17 +49,17 @@ var tryRequire = function(pkgName, defaultValue) {
   return ret;
 };
 
-var main = function() {
+const main = () => {
   logger.subtle('running bnr in', process.cwd());
 
-  var fullPackagePath = join(process.cwd(), 'package.json');
-  var pkg = require(fullPackagePath);
+  const fullPackagePath = join(process.cwd(), 'package.json');
+  const pkg = require(fullPackagePath);
 
-  var betterScriptsFromConfig;
+  let betterScriptsFromConfig;
   if (pkg.bnrConfig) {
-    var pathToConfig = path.resolve(process.cwd(), pkg.bnrConfig);
+    const pathToConfig = path.resolve(process.cwd(), pkg.bnrConfig);
     logger.subtle('loading bnrConfig', pathToConfig);
-    var config = tryRequire(pathToConfig);
+    let config = tryRequire(pathToConfig);
     if (config) {
       if (typeof config === 'function') {
         config = config();
@@ -66,13 +68,13 @@ var main = function() {
     betterScriptsFromConfig = config;
   }
 
-  var betterScripts = pkg.betterScripts;
+  let betterScripts = pkg.betterScripts;
 
   if (betterScriptsFromConfig) {
     betterScripts = assign({}, betterScripts, betterScriptsFromConfig);
   }
 
-  var commandName = process.argv[2];
+  const commandName = process.argv[2];
 
   if (!Object.keys(betterScripts).length === 0) {
     logger.error('ERROR: No betterScripts found!');
@@ -83,11 +85,11 @@ var main = function() {
     process.exit(1);
   }
   if (!betterScripts[commandName]) {
-    logger.error('ERROR: No betterScript with name "' + commandName + '" was found!');
+    logger.error(`ERROR: No betterScript with name "${commandName}" was found!`);
     process.exit(1);
   }
 
-  var theCommand = betterScripts[commandName];
+  const theCommand = betterScripts[commandName];
 
   doExec(theCommand, commandName, betterScripts);
 };
