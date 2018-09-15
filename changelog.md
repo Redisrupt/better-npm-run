@@ -1,5 +1,10 @@
 
 # @redisrupt/better-npm-run - Changelog
+## v5.0.0
+- **Refactoring**
+  - upgrade changelogx to fix issue with tags without prefix - [61822e5]( https://github.com/Redisupt/better-npm-run/commit/61822e5 ), [Roy Riojas](https://github.com/Roy Riojas), 15/09/2018 13:25:00
+
+    
 ## v3.0.0
 - **Refactoring**
   - upgrade to support babel@7 - [d8457a5]( https://github.com/Redisupt/better-npm-run/commit/d8457a5 ), [Roy Riojas](https://github.com/Roy Riojas), 15/09/2018 02:57:49
