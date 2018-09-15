@@ -23,7 +23,8 @@
     "test:params": "node index.js test:params --test",
     "test:command:object": "node index.js test:command:object",
     "test:command:string": "node index.js test:command:string",
-    "test": "node index.js eslint index.js ./lib/exec.js && node index.js test:array-command && npm run test:env && npm run test:env-extend && npm run test:params && npm run test:command:object && npm run test:command:string",
+    "lint": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'index.js' './lib/exec.js'",
+    "test": "npm run lint && node index.js test:array-command && npm run test:env && npm run test:env-extend && npm run test:params && npm run test:command:object && npm run test:command:string",
     "changelog": "changelogx -f markdown -o ./changelog.md",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog'",
     "pre-v": "npm run test",
@@ -33,15 +34,15 @@
     "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
   },
   "dependencies": {
-    "clix-logger": "1.0.0",
+    "clix-logger": "1.0.2",
     "dotenv": "^2.0.0",
     "minimist": "1.2.0",
     "object-assign": "4.1.0",
     "pretty-time": "0.2.0"
   },
   "devDependencies": {
-    "changelogx": "2.0.1",
-    "eslint": "3.12.2"
+    "@redisrupt/eslint-red": "2.0.0",
+    "changelogx": "2.0.1"
   },
   "bnrConfig": "./bnr-config.js",
   "betterScripts": {
