@@ -1,5 +1,5 @@
 {
-  "name": "@redisrupt/better-npm-run",
+  "name": "@redisrupt/bnr",
   "description": "Better NPM scripts runner",
   "version": "5.0.0",
   "license": "MIT",
@@ -15,7 +15,6 @@
   "main": "index.js",
   "bin": {
     "bnr": "index.js",
-    "better-npm-run": "index.js"
   },
   "scripts": {
     "test:env": "node index.js test:env",
