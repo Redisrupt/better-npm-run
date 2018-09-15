@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var cpExec = require( 'child_process' ).exec;
+var cpExec = require('child_process').exec;
 var logger = require('clix-logger/logger');
 var assign = require('object-assign');
 
@@ -9,26 +9,26 @@ var exec = require('./lib/exec.js');
 var join = path.join;
 
 try {
-  require('babel-register');
+  require('@babel/register');
 } catch (ex) {
   logger.subtle('babel-register not found... if ES6 syntax is needed please install `babel-register`');
 }
 
-var addNPMBinToPath = function ( cb ) {
-  cpExec( 'npm bin', function ( error, stdout, stderr ) {
-    if ( error ) {
-      logger.error( 'received error', error );
-      stderr && logger.error( stderr );
+var addNPMBinToPath = function(cb) {
+  cpExec('npm bin', function(error, stdout, stderr) {
+    if (error) {
+      logger.error('received error', error);
+      stderr && logger.error(stderr);
       return;
     }
 
     process.env.PATH += '' + path.delimiter + stdout.trim();
 
     cb && cb();
-  } );
+  });
 };
 
-var doExec = function (theCommand, commandName, config) {
+var doExec = function(theCommand, commandName, config) {
   logger.subtle('Executing script: ' + commandName);
   exec(theCommand, commandName, config);
 };
@@ -47,7 +47,7 @@ var tryRequire = function(pkgName, defaultValue) {
   return ret;
 };
 
-var main = function () {
+var main = function() {
   logger.subtle('running bnr in', process.cwd());
 
   var fullPackagePath = join(process.cwd(), 'package.json');
@@ -90,7 +90,6 @@ var main = function () {
   var theCommand = betterScripts[commandName];
 
   doExec(theCommand, commandName, betterScripts);
-
 };
 
 addNPMBinToPath(main);
