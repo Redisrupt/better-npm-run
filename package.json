@@ -25,13 +25,25 @@
     "test:command:string": "node index.js test:command:string",
     "lint": "eslint --cache --cache-location node_modules/.cache/ -f friendly '*.js' './lib/**/*.js' './test/**/*.js'",
     "test": "npm run lint && node index.js test:array-command && npm run test:env && npm run test:env-extend && npm run test:params && npm run test:command:object && npm run test:command:string",
-    "changelog": "changelogx -f markdown -o ./changelog.md",
+    "changelog": "changelogx -f markdown -o ./changelog.md --tagPrefix 'v'",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog'",
     "pre-v": "npm run test",
     "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
     "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
     "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
     "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
+  },
+  "changelogx": {
+    "ignoreRegExp": [
+      "BLD: Release",
+      "DOC: Generate Changelog",
+      "Generated Changelog"
+    ],
+    "issueIDRegExp": "#(\\d+)",
+    "commitURL": "https://github.com/Redisupt/better-npm-run/commit/{0}",
+    "authorURL": "https://github.com/{0}",
+    "issueIDURL": "https://github.com/Redisupt/better-npm-run/issues/{0}",
+    "projectName": "@redisrupt/better-npm-run"
   },
   "dependencies": {
     "clix-logger": "1.0.2",
@@ -42,7 +54,7 @@
   },
   "devDependencies": {
     "@redisrupt/eslint-red": "2.0.0",
-    "changelogx": "2.0.1"
+    "changelogx": "3.0.0"
   },
   "bnrConfig": "./bnr-config.js",
   "betterScripts": {
