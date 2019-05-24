@@ -14,7 +14,7 @@
   },
   "main": "index.js",
   "bin": {
-    "bnr": "index.js",
+    "bnr": "index.js"
   },
   "scripts": {
     "test:env": "node index.js test:env",
