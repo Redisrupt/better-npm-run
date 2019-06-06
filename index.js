@@ -11,7 +11,9 @@ const exec = require('./lib/exec.js');
 const join = path.join;
 
 try {
-  require('@babel/register');
+  require('@babel/register')({
+    extensions: ['.js', '.ts', '.json'],
+  });
 } catch (ex) {
   logger.subtle('babel-register not found... if ES6 syntax is needed please install `babel-register`');
 }
