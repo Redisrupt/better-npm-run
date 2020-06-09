@@ -1,5 +1,10 @@
 
 # @redisrupt/better-npm-run - Changelog
+## v5.0.3
+- **Refactoring**
+  - Use proper exit event to handle the closing of the process - [ddbf8b1]( https://github.com/Redisupt/better-npm-run/commit/ddbf8b1 ), [Roy Riojas](https://github.com/Roy Riojas), 09/06/2020 14:26:27
+
+    
 ## v5.0.2
 - **Refactoring**
   - make bnr to also import ts files - [aab4f9d]( https://github.com/Redisupt/better-npm-run/commit/aab4f9d ), [Roy Riojas](https://github.com/Roy Riojas), 06/06/2019 17:53:08
